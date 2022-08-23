@@ -1,0 +1,22 @@
+using System;
+
+public class Program {
+
+	public int[] SortedSquaredArray(int[] array) {
+		// Write your code here.
+        int start_ptr = 0, end_ptr = array.Length-1,res_ptr = array.Length-1;
+        int[] result_arr = new int[res_ptr+1];
+        while(start_ptr <= end_ptr)
+        {
+            if(Math.Abs(array[start_ptr]) > Math.Abs(array[end_ptr]))
+            {
+                result_arr[res_ptr--] = array[start_ptr] * array[start_ptr++];          
+            }
+            else
+            {
+                result_arr[res_ptr--] = array[end_ptr] * array[end_ptr--];          
+            }
+        }
+		return result_arr;
+	}
+}
