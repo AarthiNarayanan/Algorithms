@@ -1,0 +1,33 @@
+using System;
+using System.Collections.Generic;
+
+public class Program {
+	public static List<int[]> ThreeNumberSum(int[] array, int targetSum) {
+		// Write your code here.
+        Array.Sort(array);        
+        int num1,front_ptr,end_ptr;
+        int lastptr = array.Length -1;
+        List<int[]> result = new List<int[]>();
+        for(int ctr = 0 ; ctr < array.Length - 2; ctr++)
+        {
+            num1 = array[ctr];
+            front_ptr = ctr+1;
+            end_ptr = lastptr;
+            while(front_ptr < end_ptr)
+            {
+                if(num1 + array[front_ptr] + array[end_ptr] == targetSum)
+                {
+                result.Add(new int[]{num1,array[front_ptr],array[end_ptr]});
+                front_ptr++;
+                end_ptr--;
+                }
+                else if(num1 + array[front_ptr] + array[end_ptr] > targetSum)
+                    end_ptr--;
+                else
+                    front_ptr++;
+            }
+            
+        }
+		return result;
+	}
+}
