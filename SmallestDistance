@@ -1,0 +1,42 @@
+using System;
+
+public class Program {
+	public static int[] SmallestDifference(int[] arrayOne, int[] arrayTwo) {
+		// Write your code here.
+        Array.Sort(arrayOne);
+        Array.Sort(arrayTwo);
+        int prev_diff = -1;
+        int min_diff = Int32.MaxValue;
+        int curr_diff = 0;
+        int[] result = new int[2];        
+        for(int ptr1 = 0, ptr2 = 0; ptr1 < arrayOne.Length && ptr2 < arrayTwo.Length ;) 
+        {
+            curr_diff = Math.Abs(arrayOne[ptr1] - arrayTwo[ptr2]);
+            if(prev_diff == -1) prev_diff = curr_diff;            
+            if(curr_diff > prev_diff)
+            {
+                ptr2--;
+                if(prev_diff < min_diff)
+                {
+                    min_diff = prev_diff;
+                    result[0] = arrayOne[ptr1];
+                    result[1] = arrayTwo[ptr2];
+                }
+                ptr1++;
+                prev_diff = -1;
+            }
+            else{
+                ptr2++;
+                prev_diff = curr_diff;
+            }    
+        }
+        //If last element of both array is the result
+        if(curr_diff < min_diff)
+        {
+            min_diff = curr_diff;
+            result[0] = arrayOne[arrayOne.Length-1];
+            result[1] = arrayTwo[arrayTwo.Length-1];
+        }
+		return result;
+	}
+}
