@@ -1,2 +1,2 @@
 # Algorithms
-DSA and algorithms problem solutions 
+DSA problem solving solutions
