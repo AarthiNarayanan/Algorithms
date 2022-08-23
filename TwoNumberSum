@@ -1,0 +1,21 @@
+using System;
+using System.Collections.Generic;
+public class Program {
+	public static int[] TwoNumberSum(int[] array, int targetSum) {
+		// Write your code here.
+        HashSet<int> visited = new HashSet<int>();
+        int difference;
+        foreach(int val in array)
+        {
+            difference = targetSum - val;
+            if(visited.Contains(difference))
+            {
+                return new int[]{val,difference};
+            }
+            else{
+                visited.Add(val);
+            }
+        }
+		return new int[0];
+	}
+}
