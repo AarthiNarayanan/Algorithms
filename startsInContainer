@@ -1,0 +1,43 @@
+public class Solution {
+    public int[] PlatesBetweenCandles(string s, int[][] queries) {
+        int[] result = new int[queries.GetLength(0)];
+        int[] RBar = new int[s.Length];
+        int[] LBar = new int[s.Length];
+        int[] Stars = new int[s.Length];
+        int RightBar = -1;
+        int LeftBar = -1;
+        int starcnt = 0;
+        for(int Lindx = 0,Rindx = s.Length-1; Lindx < s.Length && Rindx >= 0; Rindx--,Lindx++)
+        {
+            if(s[Rindx] == '|')
+            {
+                RightBar = Rindx;
+            }
+            RBar[Rindx] = RightBar;
+            if(s[Lindx] == '|')
+            {
+                LeftBar = Lindx;
+            }
+            LBar[Lindx] = LeftBar;
+            if(s[Lindx] == '*')
+            {
+                starcnt++;               
+            }
+            Stars[Lindx] = starcnt;
+        }
+        int L,R;
+        for(int i = 0; i < queries.GetLength(0) ; i++)
+        {
+            //we want from start & towrds right of start and End & towrds left of end
+            L = RBar[queries[i][0]];
+            R = LBar[queries[i][1]];
+           // there are chances Rbar of end might be before Lbar of start e.g *|**| [2,3]
+            if(L > R) result[i] = 0;
+            // if no bar till that indx value would  be -1 , if any one side there is n bar it means no container so 0 e.g *|*** [2,3]
+            else if(L == -1 || R == -1) result[i] = 0;
+            else result[i] = Stars[R] - Stars[L];
+            
+        }
+        return result;
+    }
+}
